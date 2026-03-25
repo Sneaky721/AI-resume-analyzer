@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Result | AI Resume Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="result-header">
+            <h1>Resume Analysis Result</h1>
+            <a class="back-link" href="{{ url_for('index') }}">Analyze Another Resume</a>
+        </div>
+
+        <div class="score-card card">
+            <h2>Match Score</h2>
+            <div class="score-circle">{{ match_score }}%</div>
+            <p class="subtitle">Similarity between your resume and the job description.</p>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h3>Resume Skills</h3>
+                <ul>
+                    {% if resume_skills %}
+                        {% for skill in resume_skills %}
+                            <li>{{ skill }}</li>
+                        {% endfor %}
+                    {% else %}
+                        <li>No known skills detected.</li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Job Description Skills</h3>
+                <ul>
+                    {% if jd_skills %}
+                        {% for skill in jd_skills %}
+                            <li>{{ skill }}</li>
+                        {% endfor %}
+                    {% else %}
+                        <li>No known skills detected.</li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Common Skills</h3>
+                <ul>
+                    {% if common_skills %}
+                        {% for skill in common_skills %}
+                            <li>{{ skill }}</li>
+                        {% endfor %}
+                    {% else %}
+                        <li>No common skills found.</li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Missing Skills</h3>
+                <ul>
+                    {% if missing_skills %}
+                        {% for skill in missing_skills %}
+                            <li>{{ skill }}</li>
+                        {% endfor %}
+                    {% else %}
+                        <li>No missing skills found.</li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Extra Resume Skills</h3>
+                <ul>
+                    {% if extra_resume_skills %}
+                        {% for skill in extra_resume_skills %}
+                            <li>{{ skill }}</li>
+                        {% endfor %}
+                    {% else %}
+                        <li>No extra skills found.</li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Improvement Suggestions</h3>
+                <ol>
+                    {% for tip in suggestions %}
+                        <li>{{ tip }}</li>
+                    {% endfor %}
+                </ol>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

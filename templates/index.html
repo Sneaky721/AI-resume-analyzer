@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Resume Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>AI Resume Analyzer</h1>
+            <p class="subtitle">Upload your resume, paste a job description, and get instant ATS-style feedback.</p>
+
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="alert">
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <form action="{{ url_for('analyze') }}" method="POST" enctype="multipart/form-data">
+                <label for="resume_file">Upload Resume (PDF or TXT)</label>
+                <input type="file" id="resume_file" name="resume_file" accept=".pdf,.txt" required>
+
+                <label for="job_description">Paste Job Description</label>
+                <textarea
+                    id="job_description"
+                    name="job_description"
+                    rows="12"
+                    placeholder="Paste the full job description here..."
+                    required
+                ></textarea>
+
+                <button type="submit">Analyze Resume</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
